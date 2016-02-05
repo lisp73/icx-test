@@ -1,0 +1,20 @@
+
+You can run the program as follows:
+Run "lein ring server" on your command line. (This should bring up a browser with a localhost:3000
+To load the data, go to http://localhost:3000/load (This will transfer the csv data to json data. You can see the json file in "data/output.json"
+You can also see the json data in http://localhost:3000/load/show uri as well. 
+I wrote the front end using ClojureScript, the following are instructions to run it:
+run lein ring server on one command line and then lein cljsbuild auto on another command line while the server is running. 
+Go to localhost:3000/index.html and there you will see the ClojureScript content. 
+The following instruction are for seeing the content of the program via curl
+You can also navigate the program via curl, here are the instructions:
+run lein ring server
+Once the servers running, on the terminal, put following commands:
+curl -i http://localhost:3000/load
+curl -i http://localhost:3000/load/show
+curl -i http://localhost:3000/load/index.html
+If you have any questions, please feel free to contact me: 
+email: guillermoithier@gmail.com 
+mobile phone: (917)608-8300 
+
+Cheers
