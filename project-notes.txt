@@ -1,0 +1,75 @@
+This is where I keep the notes I'm working on currently:
+
+The function we are currently working on now.
+(defn run%
+  "Run CSV to JSON transformation"
+  [input output]
+    (do
+      (with-open [rdr (io/reader input)]
+        (with-open [wtr (io/writer output :append true)]
+          (doseq [line (line-seq rdr)]
+            (let [json-map (csv/read-csv line)]
+              ;;(.write wtr (str {:something (json/write-str json-map)}"\n"))))))))
+               (.write wtr (str  (json/write-str {:admin (nth (nth json-map 0)5)
+                                                  :user {:id (nth (nth json-map 0)1)}
+                                                  :event {:timestamp(nth (nth json-map 0)3)
+                                                          :uuid(nth(nth json-map 0)0)}})"\n"))))))))
+
+OUR SAMPLE DATA:
+id, fname, lname, username, lat, long, gender, age, comments, likes, dislikes, retweets
+1, John, Doe, jdoe,38.900918,-77.035857, male,45,23,10,300,35
+
+* I think I need to use zipmap to actually put the data together.
+
+(def foo ["id"," fname"," lname"," username"," lat"," long"," gender"," age"," comments"," likes"," dislikes"," retweets"]
+["1"," John"," Doe"," jdoe","38.900918","-77.035857"," male","45","23","10","300","35"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;stuff from today
+ 
+ 
+(defn run%
+  "Run CSV to JSON transformation"
+  [input output]
+    (do
+      (with-open [rdr (io/reader input)]
+        (with-open [wtr (io/writer output :append true)]
+          (doseq [line (line-seq rdr)]
+            (let [json-map (csv/read-csv line)]
+           (.write wtr (str  (json/write-str (nth (nth json-map 0)1))"\n"))))))))
+             
+(comment (defn run%
+  "Run CSV to JSON transformation"
+  [input output]
+    (do
+      (with-open [rdr (io/reader input)]
+        (with-open [wtr (io/writer output :append true)]
+          (doseq [line (line-seq rdr)]
+            (let [json-map (csv/read-csv line)]
+           (.write wtr (str  (json/write-str (rest json-map)"\n"))))))))))
+
+
+
+;;doesn;t work
+(defn run%
+  "Run CSV to JSON transformation"
+  [input output]
+    (do
+      (with-open [rdr (io/reader input)]
+        (with-open [wtr (io/writer output :append true)]
+          (doseq [line (line-seq rdr)]
+            (let [json-map (csv/read-csv line)]
+           (.write wtr (str  (json/write-str (nth (nth json-map 0)1)"\n")))))))))
